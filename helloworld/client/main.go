@@ -28,7 +28,7 @@ func main() {
 		txt = os.Args[1]
 	}
 
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	r, err := agent.SayHello(ctx, &helloworld.HelloRequest{Name: txt})

@@ -6,7 +6,7 @@ import (
 	"log"
 	"net"
 
-	pb "github.com/xm-tech/go-grpc-demo/helloworld/helloworld"
+	"github.com/xm-tech/go-grpc-demo/helloworld/helloworld"
 	"google.golang.org/grpc"
 )
 
@@ -15,19 +15,19 @@ const (
 )
 
 type server struct {
-	pb.UnimplementedGreeterServer
+	helloworld.UnimplementedGreeterServer
 }
 
 // Sends a greeting
-func (s *server) SayHello(ctx context.Context, req *pb.HelloRequest) (*pb.HelloReply, error) {
+func (s *server) SayHello(ctx context.Context, req *helloworld.HelloRequest) (*helloworld.HelloReply, error) {
 	log.Println("SayHello, req.Name=", req.Name)
 	msg := fmt.Sprintf("hello %v", req.Name)
-	return &pb.HelloReply{Message: msg}, nil
+	return &helloworld.HelloReply{Message: msg}, nil
 }
 
-func (s *server) SayHelloAgain(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
+func (s *server) SayHelloAgain(ctx context.Context, in *helloworld.HelloRequest) (*helloworld.HelloReply, error) {
 	msg := fmt.Sprintf("hello2 %v", in.Name)
-	return &pb.HelloReply{Message: msg}, nil
+	return &helloworld.HelloReply{Message: msg}, nil
 }
 
 func main() {
@@ -36,7 +36,7 @@ func main() {
 		panic(err)
 	}
 	s := grpc.NewServer()
-	pb.RegisterGreeterServer(s, &server{})
+	helloworld.RegisterGreeterServer(s, &server{})
 	log.Printf("server listening at : %v", listener.Addr())
 	if err := s.Serve(listener); err != nil {
 		panic(err)
