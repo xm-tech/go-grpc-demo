@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/xm-tech/go-grpc-demo/helloworld/helloworld"
+	"github.com/xm-tech/go-grpc-demo/api/helloworld"
 	"google.golang.org/grpc"
 )
 
@@ -36,5 +36,5 @@ func main() {
 		panic(err)
 	}
 
-	log.Println(r.GetMessage())
+	log.Println("resp: ", r.GetMessage())
 }

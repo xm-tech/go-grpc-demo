@@ -6,7 +6,7 @@ import (
 	"log"
 	"net"
 
-	"github.com/xm-tech/go-grpc-demo/helloworld/helloworld"
+	"github.com/xm-tech/go-grpc-demo/api/helloworld"
 	"google.golang.org/grpc"
 )
 
@@ -20,13 +20,8 @@ type server struct {
 
 // Sends a greeting
 func (s *server) SayHello(ctx context.Context, req *helloworld.HelloRequest) (*helloworld.HelloReply, error) {
-	log.Println("SayHello, req.Name=", req.Name)
-	msg := fmt.Sprintf("hello %v", req.Name)
-	return &helloworld.HelloReply{Message: msg}, nil
-}
-
-func (s *server) SayHelloAgain(ctx context.Context, in *helloworld.HelloRequest) (*helloworld.HelloReply, error) {
-	msg := fmt.Sprintf("hello2 %v", in.Name)
+	log.Println("server.SayHello, req=", req.GetName())
+	msg := fmt.Sprintf("hello %v", req.GetName())
 	return &helloworld.HelloReply{Message: msg}, nil
 }
 
